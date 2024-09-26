@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gripo-redis
+  labels:
+    app: gripo-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gripo-redis
+  template:
+    metadata:
+      labels:
+        app: gripo-redis
+    spec:
+      containers:
+        - name: gripo-redis
+          image: gripo/gripo-redis:1.0
