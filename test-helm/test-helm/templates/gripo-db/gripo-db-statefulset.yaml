@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: gripo-db
+spec:
+  selector:
+    matchLabels:
+      app: gripo-db
+  serviceName: "gripo-db"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gripo-db
+    spec:
+      containers:
+        - name: gripo-db
+          image: gripo/gripo-db:1.0
+          volumeMounts:
+            - name: gripodb-data
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: gripodb-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

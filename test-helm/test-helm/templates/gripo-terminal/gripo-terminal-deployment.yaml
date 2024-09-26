@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gripo-terminal
+  labels:
+    app: gripo-terminal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gripo-terminal
+  template:
+    metadata:
+      labels:
+        app: gripo-terminal
+    spec:
+      containers:
+        - name: gripo-terminal
+          image: gripo/gripo-terminal:beta-1.0
