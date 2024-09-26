@@ -1,0 +1,29 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 5055
+  targetPort: 5055
+  name: nginx
+
+nginx:
+  containerPort: 80
+  env:
+    LISTEN_PORT: "5055"     # Make sure LISTEN_PORT is nested under nginx.env
+    API_BACKEND: "5080"
+    TERMINAL_BACKEND: "8377"
+    FRONTEND_BACKEND: "3000"
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
