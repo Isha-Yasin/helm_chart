@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-nginx
+  labels:
+    app: {{ .Release.Name }}-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-nginx
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: gripo/gripo-nginx:1.0
+          ports:
+            - containerPort: {{ .Values.nginx.containerPort }}
+          env:
+            - name: LISTEN_PORT
+              value: "{{ .Values.nginx.env.LISTEN_PORT }}"
+            - name: API_BACKEND
+              value: "{{ .Values.nginx.env.API_BACKEND }}"
+            - name: TERMINAL_BACKEND
+              value: "{{ .Values.nginx.env.TERMINAL_BACKEND }}"
+            - name: FRONTEND_BACKEND
+              value: "{{ .Values.nginx.env.FRONTEND_BACKEND }}"
