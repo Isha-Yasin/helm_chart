@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gripo-frontend
+  labels:
+    app: gripo-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gripo-frontend
+  template:
+    metadata:
+      labels:
+        app: gripo-frontend
+    spec:
+      containers:
+        - name: gripo-frontend
+          image: gripo/gripo-frontend:beta-1.0
