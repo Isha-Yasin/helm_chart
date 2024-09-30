@@ -1,0 +1,37 @@
+name: Helm Chart CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  package-helm-chart:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Package Helm Chart
+        run: |
+          helm package ./
+
+      - name: Upload Chart to GitHub Pages
+        run: |
+          helm repo index ./ --url https://.github.io/ --merge index.yaml
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add index.yaml
+          git commit -m "Updated Helm Chart Index"
+          git push origin main
