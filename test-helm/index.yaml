@@ -3,12 +3,12 @@ entries:
   test-helm:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-09-27T14:39:02.766399+05:00"
+    created: "2024-09-30T17:36:29.916226+05:00"
     description: A Helm chart for Kubernetes
     digest: da39f4725c99d813afa9f07730d7975c69ce46fc07e9f0097dc376e112458f66
     name: test-helm
     type: application
     urls:
-    - https://github.com/Isha-Yasin/helm_chart/test-helm-0.1.0.tgz
+    - https://raw.githubusercontent.com/Isha-Yasin/helm_chart/main/test-helm-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-27T14:39:02.762315+05:00"
+generated: "2024-09-30T17:36:29.912094+05:00"
