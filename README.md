@@ -20,6 +20,7 @@ Add the Helm Repository
 open terminal and run this command to add your Helm chart repository:
 
     helm repo add my-gripo https://raw.githubusercontent.com/<user name>/<repository>/<branch>/
+like
 
     helm repo add my-gripo https://raw.githubusercontent.com/Isha-Yasin/helm_chart/main/
 
