@@ -1,7 +1,6 @@
 replicaCount: 1
 
 image:
-  repository: nginx
   pullPolicy: IfNotPresent
 
 service:
@@ -9,7 +8,8 @@ service:
   port: 5055
   targetPort: 5055
   name: nginx
-
+ports: 
+  port: 5055
 nginx:
   containerPort: 80
   env:
