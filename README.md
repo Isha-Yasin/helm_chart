@@ -38,3 +38,6 @@ After installing verify that
 
     kubectl get pod
     kubectl get svc
+accessing application run this command
+
+    minikube svc nginx
