@@ -19,6 +19,8 @@ By  terminal check what's inside .tgz file run this command:
 Add the Helm Repository
 open terminal and run this command to add your Helm chart repository:
 
+    helm repo add my-gripo https://raw.githubusercontent.com/<user name>/<repository>/<branch>/
+
     helm repo add my-gripo https://raw.githubusercontent.com/Isha-Yasin/helm_chart/main/
 
 Update the Helm Repositories
