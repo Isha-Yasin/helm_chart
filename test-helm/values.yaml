@@ -4,16 +4,11 @@ image:
   pullPolicy: IfNotPresent
 
 service:
+  port: 5055
   type: NodePort
-  port: 5055
-  targetPort: 5055
+  
+ 
 
-
-ports: 
-  port: 5055
-
-nginx:
-  containerPort: 5055
   # env:
   #   LISTEN_PORT: "5055"
   #   API_BACKEND: "5080"

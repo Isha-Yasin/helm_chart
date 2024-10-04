@@ -18,7 +18,8 @@ spec:
         - name: nginx
           image: gripo/gripo-nginx:1.0
           ports:
-            - containerPort: {{ .Values.nginx.containerPort }}
+            - containerPort: 5055
+            
           env:
             - name: LISTEN_PORT
               value: "5055"
