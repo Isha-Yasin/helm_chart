@@ -1,5 +1,8 @@
-# You have must installed helm:
+# Installation :
+You have must installed helm using this link
+
      https://helm.sh/docs/helm/helm_install/
+or , if you have already helm you can skip
 # Accessing Helm Chart with release :
 
 Download release under the Github repo , then navigate to the directory .
