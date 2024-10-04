@@ -1,13 +1,27 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.service.name}}
+  name: {{ .Values.service.name }}
 spec:
   selector:
-    app: {{ .Values.service.name}}
+    app: {{ .Values.service.name }}
   ports:
     - protocol: TCP
-      port: {{ .Values.ports.port}}
-      targetPort: {{ .Values.service.targetPort}}
+      port: {{ .Values.ports.port }}
+      targetPort: {{ .Values.nginx.containerPort }} 
       nodePort: 30001
-  type: {{ .Values.service.type}}
+  type: {{ .Values.service.type }}
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ .Values.service.name}}
+# spec:
+#   selector:
+#     app: {{ .Values.service.name}}
+#   ports:
+#     - protocol: TCP
+#       port: {{ .Values.ports.port}}
+#       targetPort: {{ .Values.service.targetPort}}
+#       nodePort: 30001
+#   type: {{ .Values.service.type}}

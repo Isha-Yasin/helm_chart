@@ -21,10 +21,10 @@ spec:
             - containerPort: {{ .Values.nginx.containerPort }}
           env:
             - name: LISTEN_PORT
-              value: "{{ .Values.nginx.env.LISTEN_PORT }}"
+              value: "5055"
             - name: API_BACKEND
-              value: "{{ .Values.nginx.env.API_BACKEND }}"
+              value: "http://gripo-application:5080"
             - name: TERMINAL_BACKEND
-              value: "{{ .Values.nginx.env.TERMINAL_BACKEND }}"
+              value: "http://gripo-terminal:8377"
             - name: FRONTEND_BACKEND
-              value: "{{ .Values.nginx.env.FRONTEND_BACKEND }}"
+              value: "http://gripo-frontend:3000"
