@@ -15,17 +15,16 @@ spec:
         app: {{ .Release.Name }}-nginx
     spec:
       containers:
-        - name: nginx
-          image: gripo/gripo-nginx:1.0
+        - name: {{ .Values.deployment.containers.name }}
+          image: {{ .Values.deployment.containers.image }}
           ports:
-            - containerPort: 5055
-            
+            - containerPort: {{ (index .Values.deployment.containers.ports 0).containerPort }}
           env:
             - name: LISTEN_PORT
-              value: "5055"
+              value: {{ .Values.deployment.containers.env.LISTEN_PORT | quote }}
             - name: API_BACKEND
-              value: "http://gripo-application:5080"
+              value: {{ .Values.deployment.containers.env.API_BACKEND | quote }}
             - name: TERMINAL_BACKEND
-              value: "http://gripo-terminal:8377"
+              value: {{ .Values.deployment.containers.env.TERMINAL_BACKEND | quote }}
             - name: FRONTEND_BACKEND
-              value: "http://gripo-frontend:3000"
+              value: {{ .Values.deployment.containers.env.FRONTEND_BACKEND | quote }}

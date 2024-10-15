@@ -6,50 +6,15 @@ image:
 service:
   port: 5055
   type: NodePort
-  
- 
 
-  # env:
-  #   LISTEN_PORT: "5055"
-  #   API_BACKEND: "5080"
-  #   TERMINAL_BACKEND: "8377"
-  #   FRONTEND_BACKEND: "3000"
-
-# livenessProbe:
-#   httpGet:
-#     path: /
-#     port: 80  # Corrected to 80
-# readinessProbe:
-#   httpGet:
-#     path: /
-#     port: 80  # Corrected to 80
-
-# replicaCount: 1
-
-# image:
-#   pullPolicy: IfNotPresent
-
-# service:
-#   type: NodePort
-#   port: 5055
-#   targetPort: 5055
-#   name: nginx
-# ports: 
-#   port: 5055
-# nginx:
-#   containerPort: 80
-#   env:
-#     LISTEN_PORT: "5055"     # Make sure LISTEN_PORT is nested under nginx.env
-#     API_BACKEND: "5080"
-#     TERMINAL_BACKEND: "8377"
-#     FRONTEND_BACKEND: "3000"
-
-# livenessProbe:
-#   httpGet:
-#     path: /
-#     port: http
-
-# readinessProbe:
-#   httpGet:
-#     path: /
-#     port: http
+deployment:
+  containers:
+    name: nginx
+    image: gripo/gripo-nginx:1.0
+    ports:
+      - containerPort: 5055
+    env:
+      LISTEN_PORT: "5055"
+      API_BACKEND: "http://gripo-application:5080"
+      TERMINAL_BACKEND: "http://gripo-terminal:8377"
+      FRONTEND_BACKEND: "http://gripo-frontend:3000"
