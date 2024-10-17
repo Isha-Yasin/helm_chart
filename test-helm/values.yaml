@@ -74,12 +74,6 @@ database:
     containers:
       image: gripo/gripo-db
       tags: "1.0"
-      volumeMounts:
-      - name: gripodb-data
-        mountPath: /data/db
-  volumeClaimTemplates:
-    - metadata:
-        name: gripodb-data
   PersistentVolumeClaim:
     name: gripodb-data-pvc
   service:
