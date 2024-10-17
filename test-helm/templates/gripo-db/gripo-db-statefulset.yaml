@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: {{ .name }}
-          image: {{ $.Values.database.spec.containers.image }}:{{ $.Values.database.spec.containers.tags }}
+          image: {{ $.Values.database.spec.containers.image }}
+{{- end }}
           volumeMounts:
             - name: gripodb-data
               mountPath: /data/db
@@ -28,4 +29,4 @@ spec:
         resources:
           requests:
             storage: 1Gi
-{{- end }}
+

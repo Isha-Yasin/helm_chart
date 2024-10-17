@@ -7,7 +7,7 @@ metadata:
   labels:
     app: {{ .containers.name }}
 spec:
-  replicas: {{ .replicas }}
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .containers.name }}
