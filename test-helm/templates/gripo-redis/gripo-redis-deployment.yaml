@@ -1,19 +1,21 @@
+{{ with .Values.redis }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gripo-redis
+  name: {{ .name }} 
   labels:
-    app: gripo-redis
+    app: {{ .name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gripo-redis
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: gripo-redis
+        app: {{ .name }}
     spec:
       containers:
-        - name: gripo-redis
-          image: gripo/gripo-redis:1.0
+        - name: {{ .name }}
+          image: {{ .containers.image }}:{{ .containers.tags }}
+{{ end }}

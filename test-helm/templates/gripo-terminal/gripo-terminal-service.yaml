@@ -1,12 +1,16 @@
+{{ with .Values.terminal }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: gripo-terminal
+  name: {{ .name }}
 spec:
   selector:
-    app: gripo-terminal
+    app: {{ .name }}
   ports:
-    - protocol: TCP
-      port: 8377
-      targetPort: 8377
-  type: ClusterIP
+    {{- range .service.ports }}  
+    - protocol: {{ .protocol }}
+      port: {{ .port }}
+      targetPort: {{ .targetPort }}
+    {{- end }}
+  type: {{ .type }} 
+{{ end }}

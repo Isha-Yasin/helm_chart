@@ -1,19 +1,21 @@
+{{ with .Values.terminal }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gripo-terminal
+  name: {{ .name }} 
   labels:
-    app: gripo-terminal
+    app: {{ .name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gripo-terminal
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: gripo-terminal
+        app: {{ .name }}
     spec:
       containers:
-        - name: gripo-terminal
-          image: gripo/gripo-terminal:beta-1.0
+        - name: {{ .name }}
+          image: {{ .containers.image }}:{{ .containers.tags }}
+{{ end }}
