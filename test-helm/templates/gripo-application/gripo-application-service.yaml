@@ -1,12 +1,17 @@
+{{- with .Values.application }}
+  
 apiVersion: v1
 kind: Service
 metadata:
-  name: gripo-application
+  name: {{.name}}
 spec:
   selector:
-    app: gripo-application
+    app: {{.name}}
   ports:
-    - protocol: TCP
-      port: 5080
-      targetPort: 5080
-  type: ClusterIP
+    {{- range .service.ports}}
+    - protocol: {{.protocol}}
+      port: {{.port}}
+      targetPort: {{.targetPort}}
+    {{- end}}
+  type: {{.type}}
+{{end}}

@@ -1,19 +1,23 @@
+{{- with .Values.frontend.Deployment }}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gripo-frontend
+  name: {{ .containers.name }}
   labels:
-    app: gripo-frontend
+    app: {{ .containers.name }}
 spec:
-  replicas: 1
+  replicas: {{ .replicas }}
   selector:
     matchLabels:
-      app: gripo-frontend
+      app: {{ .containers.name }}
   template:
     metadata:
       labels:
-        app: gripo-frontend
+        app: {{ .containers.name }}
     spec:
       containers:
-        - name: gripo-frontend
-          image: gripo/gripo-frontend:beta-1.0
+        - name: {{ .containers.name }}
+          image: {{ .containers.image }}:{{ .containers.tags }}
+
+{{- end }}

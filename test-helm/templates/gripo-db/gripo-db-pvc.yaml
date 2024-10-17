@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: gripodb-data-pvc
+  name: {{ .Values.database.PersistentVolumeClaim.name}}
 spec:
   accessModes:
     - ReadWriteOnce

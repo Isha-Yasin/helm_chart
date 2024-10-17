@@ -1,21 +1,22 @@
+{{- with .Values.database.StatefulSet }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: gripo-db
+  name: {{ .name }}
 spec:
+  serviceName: {{ .name | quote }}
+  replicas: 1
   selector:
     matchLabels:
-      app: gripo-db
-  serviceName: "gripo-db"
-  replicas: 1
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: gripo-db
+        app: {{ .name }}
     spec:
       containers:
-        - name: gripo-db
-          image: gripo/gripo-db:1.0
+        - name: {{ .name }}
+          image: {{ $.Values.database.spec.containers.image }}:{{ $.Values.database.spec.containers.tags }}
           volumeMounts:
             - name: gripodb-data
               mountPath: /data/db
@@ -27,3 +28,4 @@ spec:
         resources:
           requests:
             storage: 1Gi
+{{- end }}

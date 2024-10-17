@@ -1,22 +1,27 @@
+{{- with .Values.application }}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gripo-application
+  name: {{ .name }}
   labels:
-    app: gripo-application
+    app: {{ .name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gripo-application
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: gripo-application
+        app: {{ .name }}
     spec:
       containers:
-        - name: gripo-application
-          image: gripo/gripo-application:beta-1.0
+        - name: {{ .name }}
+          image: {{ .containers.image }}:{{ .containers.tags }}
           env:
-            - name: GRIPO_SERVER_ADDRESS
-              value: ":5080"
+            {{- range .containers.env }}
+            - name: {{ .name }} 
+              value: {{ .value | quote }}  
+            {{- end }}
+{{- end }}

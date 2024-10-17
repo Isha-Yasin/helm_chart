@@ -40,4 +40,49 @@ redis:
       port: 6379
       targetPort: 6379
   type: ClusterIP
-
+application:
+  name: gripo-application
+  containers:
+    image: gripo/gripo-application
+    tags: "beta-1.0"
+    env:
+      - name: GRIPO_SERVER_ADDRESS
+        value: "http://gripo-application:5080"
+  service:
+    ports:
+      - protocol: TCP
+        port: 5080
+        targetPort: 5080
+  type: ClusterIP
+frontend:
+  Deployment:
+    replicas: 1
+    containers:
+      name: gripo-frontend
+      image: gripo/gripo-frontend
+      tags: beta-1.0
+  service:
+    ports:
+      protocol: TCP 
+      port: 3000
+      targetPort: 3000
+      type: ClusterIP
+database:
+  StatefulSet:
+    name:  gripo-db 
+  spec:
+    containers:
+      image: gripo/gripo-db
+      tags: "1.0"
+      volumeMounts:
+      - name: gripodb-data
+        mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: gripodb-data
+  PersistentVolumeClaim:
+    name: gripodb-data-pvc
+  
+  service:
+    targetPort: 27017
+    port: 27017  

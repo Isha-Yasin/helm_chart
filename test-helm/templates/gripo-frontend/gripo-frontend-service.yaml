@@ -1,12 +1,13 @@
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: gripo-frontend
+  name: {{ .Values.frontend.Deployment.containers.name }} 
 spec:
   selector:
-    app: gripo-frontend
+    app: {{ .Values.frontend.Deployment.containers.name }}  
   ports:
-    - protocol: TCP
-      port: 3000
-      targetPort: 3000
-  type: ClusterIP
+    - protocol: {{ .Values.frontend.service.ports.protocol }} 
+      port: {{ .Values.frontend.service.ports.port }} 
+      targetPort: {{ .Values.frontend.service.ports.targetPort }} 
+  type: {{ .Values.frontend.service.ports.type}} 

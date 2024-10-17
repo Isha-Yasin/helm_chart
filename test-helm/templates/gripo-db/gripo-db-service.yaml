@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gripo-db
+  name: {{ .Values.database.StatefulSet.name}}
 spec:
   selector:
-    app: gripo-db
+    app: {{ .Values.database.StatefulSet.name}}
   ports:
     - protocol: TCP
-      port: 27017
-      targetPort: 27017
+      port: {{ .Values.database.service.port}}
+      targetPort: {{ .Values.database.service.targetPort}}
   clusterIP: None
