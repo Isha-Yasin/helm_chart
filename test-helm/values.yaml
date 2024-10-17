@@ -82,7 +82,6 @@ database:
         name: gripodb-data
   PersistentVolumeClaim:
     name: gripodb-data-pvc
-  
   service:
     targetPort: 27017
     port: 27017  
