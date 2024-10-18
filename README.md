@@ -17,7 +17,7 @@ After adding the repository, they need to update Helm to get the latest version 
 # Install the Chart
 Once the repository is added and updated, they can install the chart using the following command:
 
-    helm install <release-name> my-gripo/test-helm
+    helm install release-service my-gripo/test-helm
 
 After installing verify that 
 
