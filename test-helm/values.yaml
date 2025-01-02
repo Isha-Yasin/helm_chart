@@ -18,6 +18,7 @@ deployment:
       API_BACKEND: "http://gripo-application:5080"
       TERMINAL_BACKEND: "http://gripo-terminal:8377"
       FRONTEND_BACKEND: "http://gripo-frontend:3000"
+
 terminal:
   name: gripo-terminal
   containers:
@@ -29,6 +30,7 @@ terminal:
       port: 8377
       targetPort: 8377
   type: ClusterIP
+
 redis:
   name: gripo-redis
   containers:
@@ -40,6 +42,7 @@ redis:
       port: 6379
       targetPort: 6379
   type: ClusterIP
+
 application:
   name: gripo-application
   containers:
@@ -54,6 +57,7 @@ application:
         port: 5080
         targetPort: 5080
   type: ClusterIP
+
 frontend:
   Deployment:
     containers:
@@ -66,12 +70,23 @@ frontend:
       port: 3000
       targetPort: 3000
       type: ClusterIP
+
 database:
   StatefulSet:
-    name:  gripo-db 
-  spec:
-    containers:
-      image: gripo/gripo-db:1.0
+    name: gripo-db
+    spec:
+      replicas: 1
+      containers:
+        - name: gripo-db
+          image: gripo/gripo-db:1.0
+          ports:
+            - containerPort: 27017
+              name: db-port
+
   service:
-    targetPort: 27017
-    port: 27017  
+    ports:
+      - protocol: TCP
+        port: 27017
+        targetPort: 27017
+    selector:
+      app: gripo-db

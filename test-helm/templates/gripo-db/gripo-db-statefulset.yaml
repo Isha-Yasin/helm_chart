@@ -1,33 +1,22 @@
-{{- with .Values.database.StatefulSet }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .name }}
+  name: {{ .Values.database.StatefulSet.name }}
 spec:
-  serviceName: {{ .name | quote }}
-  replicas: 1
+  replicas: {{ .Values.database.StatefulSet.replicas | default 1 }}
   selector:
     matchLabels:
-      app: {{ .name }}
-    template:
+      app: {{ .Values.database.StatefulSet.name }}
+  serviceName: {{ .Values.database.StatefulSet.name }}
+  template:
     metadata:
       labels:
-        app: {{ .name }}
+        app: {{ .Values.database.StatefulSet.name }}
     spec:
       containers:
+        {{- range .Values.database.StatefulSet.spec.containers }}
         - name: {{ .name }}
-{{- end }}
-          image: {{ .Values.database.spec.containers.image }}
-
-          volumeMounts:
-            - name: gripodb-data
-              mountPath: /data/db
-  volumeClaimTemplates:
-    - metadata:
-        name: gripodb-data
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 1Gi
-
+          image: {{ .image }}
+          ports:
+            - containerPort: 27017
+        {{- end }}
